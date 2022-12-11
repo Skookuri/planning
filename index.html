@@ -1,252 +1,362 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-    </script>
-    
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Italiana');
-        html {
-        	overflow: hidden;
-  			overscroll-behavior: none;
-        }
-        body {
-        	margin: 0;
-            background-color: black;
-        }
-        #body2 {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            background-color: black;
-        }
-  
-        #body2::before {
-            content: "";
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            bottom: 0px;
-            left: 0px;
-  
-            /* Specify the background image to be used */
-            background-image: url(
-'https://media.discordapp.net/attachments/753663089265868873/1051205470074978394/Screen_Shot_2022-12-10_at_13.35.04.png?width=2160&height=1126');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            
-  
-            /* Specify the background image */
-            opacity: 0.45;
-            z-index: 0;
-            
-        }
-        
-        .btn-group {
-        	position: fixed;
-    		display: block;
-            top: 58%;
-            z-index: 98;
-		}
-        
-        .title {
-        	margin: 0;
-        	text-align: center;
-            float: center;
-            justify-content: space-around;
-            z-index: 100;
-            vertical-align: center;
-            position: absolute;
-            top: 40%;
-        }
-        
-        #homebutton {
-        	background-color: rgba(138,108,80, 0.6);
-            border: none;
-            color: white;
-            padding: 10px;
-            margin: 10px;
-            font-size: 20px;
-            border-radius: 25px;
-            font-family: Times;
-        }
-        
-        #complete {
-        	background-color: rgb(138,108,80);
-            border: none;
-            color: white;
-            padding: 10px;
-            margin: 10px;
-            font-size: 20px;
-            border-radius: 25px;
-            font-family: Times;
-        }
-        
-        button {
-        	cursor: pointer;
-        }
-        
-        #complete:hover, #homebutton:hover {
-        	color: rgb(138,108,80);
-            background-color: white;
-            opacity: 0.8;
-            transition: ease 0.6s;
-        }
-        
-        
-        #complete:hover {
-        	border-style: solid;
-        	border-color: rgb(138,108,80);
-            
-            
-        }
-        
-        .subtitle {
-        	position: fixed;
-    		display: block;
-        	top: 52%;
-            z-index: 99;
-        }
-        
-        #popup {
-        	font-family: Italiana;
-        	font-size: 30px;
-            
-        	top: 30%;
-            /*left: 143px;
-            right: 50%;*/
-            
-            right, left: 50%;
-            
-        	display: none;
-        	color:rgb(138,108,80);
-            border-radius: 15px;
-            position: fixed;
-            padding: 10px;
-            z-index: 1000;
-            margin: 0 auto;
-            height: fit-content;
-            background-color: white;
-            width: 50%;
-            text-align: center;
-            vertical-align: center;
-        }
-        
-        #close {
-        	content: "\00d7"; /* This will render the 'X' */
-        	float: right;
-            color: white;
-            display: inline-block;
-            border-radius: 25px;
-            border: none;
-            background-color: rgb(138,108,80);
-        }
-        
-        /*screens bigger than 650px has this width*/
-        @media screen and (min-width: 651px) {
-        	#popup {
-            	width: 325px;
-            }
-        }
-        
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>plans!</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
+<style>
+@import url('https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One');
+ body {
+ 	margin: 0;
+
+ }
+	
+ .timeline {
+	 display: flex;
+	 margin: 0 auto;
+	 flex-wrap: wrap;
+	 flex-direction: column;
+	 max-width: 700px;
+	 position: relative;
+}
+ .timeline__content-title {
+	 font-weight: normal;
+	 font-size: 66px;
+	 margin: -10px 0 0 0;
+	 transition: 0.4s;
+	 padding: 0 10px;
+	 box-sizing: border-box;
+	 font-family: 'Pathway Gothic One', sans-serif;
+	 color: #fff;
+}
+ .timeline__content-desc {
+	 margin: 0;
+	 font-size: 25px;
+	 box-sizing: border-box;
+	 color: rgba(255, 255, 255, .7);
+	 font-family: Cardo;
+	 font-weight: normal;
+	 line-height: 30px;
+}
+ .timeline:before {
+	 position: absolute;
+	 left: 50%;
+	 width: 2px;
+	 height: 100%;
+	 margin-left: -1px;
+	 content: "";
+	 background: rgba(255, 255, 255, .07);
+}
+ @media only screen and (max-width: 767px) {
+	 .timeline:before {
+		 left: 40px;
+	}
+}
+ .timeline-item {
+	 padding: 40px 0;
+	 opacity: 0.3;
+	 filter: blur(2px);
+	 transition: 0.5s;
+	 box-sizing: border-box;
+	 width: calc(50% - 40px);
+	 display: flex;
+	 position: relative;
+	 transform: translateY(-80px);
+}
+ .timeline-item:before {
+	 content: attr(data-text);
+	 letter-spacing: 3px;
+	 width: 100%;
+	 position: absolute;
+	 color: rgba(255, 255, 255, .5);
+	 font-size: 13px;
+	 font-family: 'Pathway Gothic One', sans-serif;
+	 border-left: 2px solid rgba(255, 255, 255, .5);
+	 top: 70%;
+	 margin-top: -5px;
+	 padding-left: 15px;
+	 opacity: 0;
+	 right: calc(-100% - 56px);
+}
+ .timeline-item:nth-child(even) {
+	 align-self: flex-end;
+}
+ .timeline-item:nth-child(even):before {
+	 right: auto;
+	 text-align: right;
+	 left: calc(-100% - 56px);
+	 padding-left: 0;
+	 border-left: none;
+	 border-right: 2px solid rgba(255, 255, 255, .5);
+	 padding-right: 15px;
+}
+ .timeline-item--active {
+	 opacity: 1;
+	 transform: translateY(0);
+	 filter: blur(0px);
+}
+ .timeline-item--active:before {
+	 top: 50%;
+	 transition: 0.3s all 0.2s;
+	 opacity: 1;
+}
+ .timeline-item--active .timeline__content-title {
+	 margin: -50px 0 20px 0;
+}
+ @media only screen and (max-width: 767px) {
+	 .timeline-item {
+		 align-self: baseline !important;
+		 width: 100%;
+		 padding: 0 30px 150px 80px;
+	}
+	 .timeline-item:before {
+		 left: 10px !important;
+		 padding: 0 !important;
+		 top: 50px;
+		 text-align: center !important;
+		 width: 60px;
+		 border: none !important;
+	}
+	 .timeline-item:last-child {
+		 padding-bottom: 40px;
+	}
+}
+ .timeline__img {
+	 max-width: 100%;
+	 box-shadow: 0 10px 15px rgba(0, 0, 0, .4);
+}
+ .timeline-container {
+	 width: 100%;
+	 position: relative;
+	 padding: 80px 0;
+	 transition: 0.3s ease 0s;
+	 background-attachment: fixed;
+	 background-size: cover;
+}
+ .timeline-container:before {
+	 position: absolute;
+	 left: 0;
+	 top: 0;
+	 width: 100%;
+	 height: 100%;
+	 background: rgba(99, 99, 99, 0.8);
+	 content: "";
+}
+ .timeline-header {
+	 width: 100%;
+	 text-align: center;
+	 margin-bottom: 80px;
+	 position: relative;
+}
+ .timeline-header__title {
+	 color: #fff;
+	 font-size: 46px;
+	 font-family: Cardo;
+	 font-weight: normal;
+	 margin: 0;
+}
+ .timeline-header__subtitle {
+	 color: rgba(255, 255, 255, .5);
+	 font-family: 'Pathway Gothic One', sans-serif;
+	 font-size: 16px;
+	 letter-spacing: 5px;
+	 margin: 10px 0 0 0;
+	 font-weight: normal;
+}
+ .demo-footer {
+	 padding: 60px 0;
+	 text-align: center;
+}
+ .demo-footer a {
+	 color: #999;
+	 display: inline-block;
+	 font-family: Cardo;
+}
+ 
+</style>
 </head>
-  
 <body>
-<div id="body2" style="color: white;">
-	<div class="loginpopup" id="popup">
-    	<form>
-        <button class="loginclose" id="close">x</button>
-        <br>
-        
-        <label for="username"><b>username</b></label>
-		<br>
-    	<input type="text" placeholder="Enter Username" name="username" required>
-        <br>
-        <br>
-        
-    	<label for="password"><b>password</b></label>
-        <br>
-    	<input type="password" placeholder="Enter Password" name="password" required>
-        <br>
-        
-        <button class="loginproceed" id="complete">log In!</button>
-        <br>
-        
-    	<label for="remember" style="font-size: 20px; font-family: Times;">
-      	<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px;"> remember me
-    	</label>
-		</form>
+<div class="timeline-container" id="timeline-1">
+    <div class="timeline-header">
+        <h2 class="timeline-header__title">Alyssa's Goals</h2>
+        <h2 class="timeline-header__title" id="demo" style="font-size: 20px;"></h2>
+        <h3 class="timeline-header__subtitle">Planning for the future</h3>
     </div>
-    
-    <div class="signuppopup" id="popup">
-    	<form>
-        <button class="signupclose" id="close">x</button>
-        <br>
-        
-        <label for="username"><b>username</b></label>
-		<br>
-    	<input type="text" placeholder="Enter Username" name="username" required>
-        <br>
-        <br>
-        
-    	<label for="password"><b>password</b></label>
-        <br>
-    	<input type="password" placeholder="Enter Password" name="password" required>
-        <br>
-        <br>
-        
-        <label for="psw-repeat"><b>repeat password</b></label>
-        <br>
-    	<input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-        <br>
-        
-        <button class="signinproceed" id="complete">sign in!</button>
-        <br>
-        
-    	<label for="remember" style="font-size: 20px; font-family: Times;">
-      	<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px;"> remember me
-    	</label>
-		</form>
-    </div>
-    <!--popups-->
-    
-    
-    
-    <h2 class="title" style="font-size: 96px; font-family: Italiana; font-weight: normal;">merryMe</h2>
-    <h3 class="subtitle" style="font-weight: normal; font-style: italic;">making wedding planning easier.</h3>
-        <div class="btn-group">
-        	<button class="login" id="homebutton">login</button>
-        	<button class="signup" id="homebutton">sign up</button>
+    <div class="timeline">
+        <div class="timeline-item" data-text="1 Yr Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/feccfe867310980171d23658a71f025e/a4cc905fcfca1e50-26/s500x750/580ae4c0a37a5916c30fc9eecb244a6472d581ed.gifv" />
+                <h2 class="timeline__content-title">Location</h2>
+                <p class="timeline__content-desc">Research and compare different areas of Japan to determine where you would like to live. Consider factors such as cost of living, job opportunities, and quality of life. Start learning about the Japanese job market and research potential employers in your field. Consider networking with other professionals and attending job fairs to learn more about opportunities in Japan.</p>
+            </div>
         </div>
+        <div class="timeline-item" data-text="1 Yr Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/b27fd3f2ea5dada3be2bb8102025475e/cdf9ed33fab216e0-5b/s500x750/6245a5e69449cb8623ff2669b79c44469f770965.gifv" />
+                <h2 class="timeline__content-title">Moving</h2>
+                <p class="timeline__content-desc">Contact a moving company to help you transport your belongings to Japan. Make sure to get multiple quotes and compare prices before choosing a company.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Yr Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/3c9b787948f7fb776747615e63fc527d/4edec37ae43aecb9-55/s500x750/f823d9e12c9e20cd6703581fb4819a0e96dc1d75.gifv" />
+                <h2 class="timeline__content-title">Insurance</h2>
+                <p class="timeline__content-desc">Consider purchasing health insurance in Japan to cover any medical expenses you may incur while living in the country.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="6 Months Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/62678bc00736cf58872e5ac265ddd54a/a4cc905fcfca1e50-46/s500x750/0b741ae9b9df93e19c5e5f8bf614e0e08248d68f.gifv" />
+                <h2 class="timeline__content-title">Confirmation</h2>
+                <p class="timeline__content-desc">Confirm your moving arrangements with your chosen moving company.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="6 Months Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/0cd9fb49eeef929bc147727cb840866b/863ae8d207e883d5-32/s500x750/065ff0940729cec78db4e924ed1d10f34a4aed0b.gifv" />
+                <h2 class="timeline__content-title">Flight Prep</h2>
+                <p class="timeline__content-desc">Book your flights to Japan and make any necessary travel arrangements. Start packing your belongings and make a list of items you will need to bring with you to Japan.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="6 Months Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/4080ca1c61f97edaaca378da59c52780/tumblr_p0o1cv7riL1w86w6ho1_500.gifv" />
+                <h2 class="timeline__content-title">Bank</h2>
+                <p class="timeline__content-desc">Notify your bank, credit card company, and any other relevant financial institutions of your upcoming move. Begin the process of closing any accounts or canceling any services that you will no longer need in the United States.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/c38b7b122876bf1aceaeb473ce702fd4/tumblr_oqudr6kBhL1upe1ufo1_500.gifv" />
+                <h2 class="timeline__content-title">Confirm</h2>
+                <p class="timeline__content-desc">Confirm your travel plans and make any necessary changes.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/3450a553b9a53d22da99d9fdd94252ce/tumblr_p38w02zbwC1rf1vfdo1_500.gifv" />
+                <h2 class="timeline__content-title">Paperwork</h2>
+                <p class="timeline__content-desc">Complete any necessary paperwork for your move, such as customs forms for your belongings.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/7695c021e937ad9312162f3638112ecf/tumblr_orko4ePAm61qzxv73o1_r3_500.gifv" />
+                <h2 class="timeline__content-title">Details</h2>
+                <p class="timeline__content-desc">Attend to any last-minute details, such as canceling your utilities or updating your mailing address.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/a559529aafa65eb3d0ced44ea14b5b28/tumblr_ogj2frARZU1qkz08qo1_500.gifv" />
+                <h2 class="timeline__content-title">Passport</h2>
+                <p class="timeline__content-desc">Make sure you have all the necessary documents, such as your passport, ready for your trip.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/ed02bab4c0b00d729dcc09de35a3e627/tumblr_og0ovr8ukM1ssfq42o1_500.gifv" />
+                <h2 class="timeline__content-title">Goodbyes</h2>
+                <p class="timeline__content-desc">Start saying goodbye to friends and family and make plans to stay in touch with them after your move.</p>
+            </div>
+        </div>
+        <div class="timeline-item" data-text="1 Month Left">
+            <div class="timeline__content"><img class="timeline__img" src="https://64.media.tumblr.com/0f7cbefe40cafe20bb28d0d479519348/cdf9ed33fab216e0-2a/s500x750/02f4bce1a21df070f7fc7d92899ccbe90cbe8fa9.gifv" />
+                <h2 class="timeline__content-title">Move</h2>
+                <p class="timeline__content-desc">Move</p>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="demo-footer">
+	<a href="https://skookuri.github.io/cs20hw0" target="_blank">Main Goals Checklist</a>
+    <br>
+    <a href="https://www.reddit.com/r/AmerExit/" target="_blank">Subreddit for Leaving the US</a>
+    <br>
+    <a href="https://www.reddit.com/r/IWantOut/" target="_blank">Subreddit for Leaving Countries</a>
+</div>
+
 <script>
-$(document).ready(function(){
-  $('body').css('display', 'none');
-  
-  $('body:not(.title)').fadeIn(1000);
-  
-  $(".login").click(function(){
-    $(".loginpopup").fadeIn();
-  });
-  
-  $(".loginclose").click(function(){
-  	$(".loginpopup").hide();
-  });
-  
-  $(".signup").click(function(){
-    $(".signuppopup").fadeIn();
-  });
-  
-  $(".signupclose").click(function(){
-    $(".signuppopup").hide();
-  });
-});
+(function($) {
+  $.fn.timeline = function() {
+    var selectors = {
+      id: $(this),
+      item: $(this).find(".timeline-item"),
+      activeClass: "timeline-item--active",
+      img: ".timeline__img"
+    };
+    selectors.item.eq(0).addClass(selectors.activeClass);
+    selectors.id.css(
+      "background-image",
+      "url(" +
+        selectors.item
+          .first()
+          .find(selectors.img)
+          .attr("src") +
+        ")"
+    );
+    var itemLength = selectors.item.length;
+    $(window).scroll(function() {
+      var max, min;
+      var pos = $(this).scrollTop();
+      selectors.item.each(function(i) {
+        min = $(this).offset().top;
+        max = $(this).height() + $(this).offset().top;
+        var that = $(this);
+        if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+          selectors.item.removeClass(selectors.activeClass);
+          selectors.id.css(
+            "background-image",
+            "url(" +
+              selectors.item
+                .last()
+                .find(selectors.img)
+                .attr("src") +
+              ")"
+          );
+          selectors.item.last().addClass(selectors.activeClass);
+        } else if (pos <= max - 40 && pos >= min) {
+          selectors.id.css(
+            "background-image",
+            "url(" +
+              $(this)
+                .find(selectors.img)
+                .attr("src") +
+              ")"
+          );
+          selectors.item.removeClass(selectors.activeClass);
+          $(this).addClass(selectors.activeClass);
+        }
+      });
+    });
+  };
+})(jQuery);
+
+$("#timeline-1").timeline();
+</script>
+
+
+<script>
+////TIMER CODE
+// Set the date we're counting down to
+var countDownDate = new Date("July 5, 2024 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
 </script>
 </body>
-  
 </html>
